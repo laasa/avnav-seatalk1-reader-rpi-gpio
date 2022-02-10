@@ -7,8 +7,8 @@ The plugin read seatalk 1 protocol via configured GPIO on Raspberry Pi.
 
 It is widely based on the
 - seatalk remote plugin (https://github.com/wellenvogel/avnav-seatalk-remote-plugin),
-- more nmea plugin (https://github.com/kdschmidt1/avnav-more-nmea-plugin) and
--  (https://github.com/Thomas-GeDaD/Seatalk1-Raspi-reader).
+- more nmea plugin      (https://github.com/kdschmidt1/avnav-more-nmea-plugin) and
+- Seatalk Raspi Reader  (https://github.com/Thomas-GeDaD/Seatalk1-Raspi-reader).
 
 There exist the way to activate the GPIO plugin in openplotter/signalk base on 'Seatalk1 Raspi Reader'.
 But especially for beginners like me it's possibly a bit to complicate to get knowledge 
