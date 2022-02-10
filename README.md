@@ -8,7 +8,7 @@ The plugin read seatalk 1 protocol via configured GPIO on Raspberry Pi.
 It is widely based on the
 - seatalk remote plugin (https://github.com/wellenvogel/avnav-seatalk-remote-plugin),
 - more nmea plugin      (https://github.com/kdschmidt1/avnav-more-nmea-plugin) and
-- Seatalk Raspi Reader  (https://github.com/Thomas-GeDaD/Seatalk1-Raspi-reader).
+- Seatalk1 to NMEA 0183 (https://github.com/MatsA/seatalk1-to-NMEA0183/blob/master/STALK_read.py).
 
 There exist the way to activate the GPIO plugin in openplotter/signalk base on 'Seatalk1 Raspi Reader'.
 But especially for beginners like me it's possibly a bit to complicate to get knowledge 
@@ -42,6 +42,7 @@ Pin 3,4 and 5 of these socket are used for anchor chain counter (reed contact, u
 # Installation
 
 To install this plugin please 
+- install packages via: sudo apt-get update && sudo apt-get install pigpio python-pigpio python3-pigpio
 - create directory '/usr/lib/avnav/plugins/avnav-seatalk1-reader-rpi-gpio' and 
 - and copy the file plugin.py to this directory.
 
