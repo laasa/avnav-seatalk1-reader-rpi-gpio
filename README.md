@@ -22,8 +22,9 @@ Especially the last thing could be interesting: To have the most current 'depth 
 
 # Parameter
 
-- GPIO pin on raspberry (default is GPIO4 on pin 7)
-- Inverted flag (default is on)
+- gpio    : Define gpio where the SeaTalk1 (yellow wire) is sensed (default is 4 => GPIO4 on pin 7)
+- inverted: Define if input signal shall be inverted 0 => not inverted, 1 => Inverted (default is 1)
+- pulldown: Define if using internal RPi pull up/down 0 => No, 1= Pull down, 2=Pull up (default is 2)
 
 # Details
 
@@ -43,7 +44,9 @@ Pin 3,4 and 5 of these socket are used for anchor chain counter (reed contact, u
 
 To install this plugin please 
 - install packages via: sudo apt-get update && sudo apt-get install pigpio python-pigpio python3-pigpio
+- start pigpio deamon e.g. via sudo servive pigdiod restart
 - create directory '/usr/lib/avnav/plugins/avnav-seatalk1-reader-rpi-gpio' and 
 - and copy the file plugin.py to this directory.
 
 # Known issues
+- start pigpiod automatically
