@@ -17,7 +17,7 @@ But especially for beginners like me it's possibly a bit to complicate to get kn
 - what is the way to get these values in avnav.
 
 It takes a bit of time to understand the powerful ideas of multiplexing between all the software in openplotter family.
-To get in touch with avnav plugin programming and python and to have simple and short data ways.
+To get in touch with avnav plugin programming and python and to have simple and short data ways I tried another way.
 Especially the last thing could be interesting: To have the most current 'depth below transducer' value and not the 2 seconds old one.
 
 # Parameter
