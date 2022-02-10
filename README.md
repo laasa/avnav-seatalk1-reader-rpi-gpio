@@ -34,10 +34,10 @@ I have used the circuit suggested here: https://pysselilivet.blogspot.com/2020/0
 
 ![grafik](https://user-images.githubusercontent.com/98450191/153389077-942ecb63-cb50-4e82-a864-6e4f0f91789d.png)
 
-I have selected such an 4 channel module like these (because need 3 more channels for anchor chain counter):
-https://www.amazon.de/ARCELI-4-Kanal-Optokoppler-Isolationsplatine-Spannungswandler-Adaptermodul-Treiber-photoelektrisches-isoliertes/dp/B07M78S8LB/ref=pd_sbs_1/260-1449482-1696735?pd_rd_w=Df0m7&pf_rd_p=840402ae-0fda-4c49-9fb0-db7f87dd6eac&pf_rd_r=8C33FJAHG1QXVSPJHZ39&pd_rd_r=eeb65acd-b5f1-4dd3-a0f9-9ab06bdb2d1e&pd_rd_wg=83s8w&pd_rd_i=B07M78S8LB&psc=1
-![grafik](https://user-images.githubusercontent.com/98450191/153393362-7f0dbe5f-a59a-4b9c-97da-4f488cb2bb4f.png)
+I have selected such an 4 channel module like BUCCK_817_4_V1.0 (because need 3 more channels for anchor chain counter).
 
+Inside the Seatalk1 data line I have added an additional Resistor of 1K and couple both signals (Seatalk 1 Data, GND) via pin 1&2 on a 5-pin-socket.
+Pin 3,4 and 5 of these socket are used for anchor chain counter (reed contact, up , down).
 
 # Installation
 
