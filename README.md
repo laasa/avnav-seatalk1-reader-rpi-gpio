@@ -31,16 +31,20 @@ Especially the last thing could be interesting: To have the most current 'depth 
 # Hardware needs
 It is strongly commended to use optocoupler between seatalk 1 level and Raspberry Pi inputs.
 
-I have used the circuit suggested here: https://pysselilivet.blogspot.com/2020/06/seatalk1-to-nmea-0183-converter-diy.html
+An example for such an circuit is suggested here: https://pysselilivet.blogspot.com/2020/06/seatalk1-to-nmea-0183-converter-diy.html
 
 ![grafik](https://user-images.githubusercontent.com/98450191/153389077-942ecb63-cb50-4e82-a864-6e4f0f91789d.png)
 
-I have selected such an 4 channel module like BUCCK_817_4_V1.0 (because need 3 more channels for anchor chain counter).
+When needing more then 1 optical inputs (e.g. 3 for anchor chain counter) it make sense to use an module like BUCCK_817_4_V1.0.
 
 Inside the Seatalk1 data line I have added an additional Resistor of 1K and couple both signals (Seatalk 1 Data, GND) via pin 1&2 on a 5-pin-socket.
 Pin 3,4 and 5 of these socket are used for anchor chain counter (reed contact, up , down).
+The rasperry pi is not fixed build on the boat.
 
-# Installation
+![grafik](https://user-images.githubusercontent.com/98450191/153439634-f86f9489-a16b-4b90-9781-0ee49bab2a9d.png) Source is Wikipedia
+
+
+# Software installation
 
 To install this plugin please 
 - install packages via: sudo apt-get update && sudo apt-get install pigpio python-pigpio python3-pigpio
