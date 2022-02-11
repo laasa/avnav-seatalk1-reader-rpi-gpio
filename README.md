@@ -53,11 +53,11 @@ To install this plugin please
 - and copy the file plugin.py to this directory.
 
 # Using in anvav
-- STW: 
+- STW: value from gps.SEATALK_STW in [m/s]
 
-![grafik](https://user-images.githubusercontent.com/98450191/153557139-58853b6d-434a-473a-be48-8eb8cc98663f.png)
+![grafik](https://user-images.githubusercontent.com/98450191/153569250-92ccd43b-df36-41cf-88ca-6f6340052a29.png)
 
-- DBT: 
+- DBT: value from gpc.SEATALK_DBT in [m]
 
 ![grafik](https://user-images.githubusercontent.com/98450191/153557342-b5453d97-4b93-4f32-a148-b5365c5bd431.png)
 
