@@ -37,6 +37,9 @@ An example for such an circuit is suggested here: https://pysselilivet.blogspot.
 
 When needing more then 1 optical inputs (e.g. 3 for anchor chain counter) it make sense to use an module like BUCCK_817_4_V1.0.
 
+![grafik](https://user-images.githubusercontent.com/98450191/153608792-99a1337d-caae-4a5d-8227-dcfd2a1625f6.png)
+
+
 Inside the Seatalk1 data line I have added an additional Resistor of 1K and couple both signals (Seatalk 1 Data, GND) via pin 1&2 on a 5-pin-socket.
 Pin 3,4 and 5 of these socket are used for anchor chain counter (reed contact, up , down).
 The rasperry pi is not fixed build on the boat.
