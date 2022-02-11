@@ -124,7 +124,7 @@ class Plugin:
       #if not self.isConnected:
         #return {'status': 'not connected'}
       try:
-        item = self.queue.get()
+        item = self.queue.get(block=True, timeout=10)
         data = item.split("\r")
         #self.api.log("Read from queue: '" + str(data[0]) + "'")
         darray = data[0].split(",")
@@ -182,6 +182,8 @@ class Plugin:
 
       except Exception as e:
         self.api.error("unable to read from queue: " + str(e))
+        self.api.addData(self.PATHDBT, float('0'),source=source)
+        self.api.addData(self.PATHSTW, float('0'),source=source)        
         pass
 
       time.sleep(0.1)
