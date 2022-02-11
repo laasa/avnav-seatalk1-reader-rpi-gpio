@@ -119,11 +119,12 @@ class Plugin:
     connectionHandler=threading.Thread(target=self.handleConnection, name='seatalk1-reader-rpi-gpio')
     connectionHandler.setDaemon(True)
     connectionHandler.start()
-    #while changeSequence == self.changeSequence:
-    while True:
+    while changeSequence == self.changeSequence:
       #if not self.isConnected:
-        #return {'status': 'not connected'}
+        #return {'status': 'not connected'}      
+      
       try:
+        source='internal'
         item = self.queue.get(block=True, timeout=10)
         data = item.split("\r")
         #self.api.log("Read from queue: '" + str(data[0]) + "'")
@@ -136,7 +137,6 @@ class Plugin:
             value=int('0x' + str(darray[4]),base=16) + (int('0x'+ str(darray[5]), base=16)*255)
             self.api.debug("Get DBT SEATALK frame: " + str(value) + "'")
             rt['DBT'] = float(value or '0') / (10.0 * 3.281)
-            source='internal'
             self.api.addData(self.PATHDBT, rt['DBT'],source=source)
 
 #                DBT - Depth below transducer
@@ -159,7 +159,6 @@ class Plugin:
             value=int('0x' + str(darray[3]),base=16) + (int('0x'+ str(darray[4]), base=16)*255)
             self.api.debug("Get STW SEATALK frame: " + str(value) + " (0x" + str(darray[4]) +  str(darray[3]) + ")")
             rt['STW'] = ((float(value or '0') / 10.0) * 1.852) / 3.6
-            source='internal'
             self.api.addData(self.PATHSTW, rt['STW'],source=source)
 
       #VHW - Water speed and heading
@@ -210,7 +209,7 @@ class Plugin:
           self.st1read.bb_serial_invert(int(self.gpio), int(self.inverted))	# Invert data
           self.st1read.set_pull_up_down(int(self.gpio), int(self.pulldown))	# Set pull up/down
 
-          self.api.setStatus("SEATALK1","connected to GPIO%s (inverted:%s)" % (self.gpio, self.inverted))
+          self.api.setStatus("NMEA","connected to GPIO%s (inverted:%s)" % (self.gpio, self.inverted))
           self.api.log("connected to GPIO%s (inverted:%s)" % (self.gpio, self.inverted))
           self.isConnected=True
           errorReported=False
