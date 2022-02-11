@@ -1,5 +1,6 @@
 # avnav-seatalk1-reader-rpi-gpio
 
+![grafik](https://user-images.githubusercontent.com/98450191/153623769-4ab956b5-590d-4d75-9731-8f2953d3d16e.png)
 
 # General
 
