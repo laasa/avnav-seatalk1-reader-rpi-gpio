@@ -53,6 +53,12 @@ To install this plugin please
 - and copy the file plugin.py to this directory.
 
 # Using in anvav
-- STW: ![grafik](https://user-images.githubusercontent.com/98450191/153557139-58853b6d-434a-473a-be48-8eb8cc98663f.png)
-- DBT: ![grafik](https://user-images.githubusercontent.com/98450191/153557342-b5453d97-4b93-4f32-a148-b5365c5bd431.png)
+- STW: 
+
+![grafik](https://user-images.githubusercontent.com/98450191/153557139-58853b6d-434a-473a-be48-8eb8cc98663f.png)
+
+- DBT: 
+
+![grafik](https://user-images.githubusercontent.com/98450191/153557342-b5453d97-4b93-4f32-a148-b5365c5bd431.png)
+
 
