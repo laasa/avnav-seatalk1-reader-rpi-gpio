@@ -134,7 +134,7 @@ class Plugin:
           if((darray[1] == '00') and (darray[2] == '02') and (darray[3] == '00')):
             rt={}
             value=int('0x' + str(darray[4]),base=16) + (int('0x'+ str(darray[5]), base=16)*255)
-            #self.api.log("Get DBT SEATALK frame: " + str(value) + "'")
+            self.api.debug("Get DBT SEATALK frame: " + str(value) + "'")
             rt['DBT'] = float(value or '0') / (10.0 * 3.281)
             source='internal'
             self.api.addData(self.PATHDBT, rt['DBT'],source=source)
@@ -157,8 +157,8 @@ class Plugin:
           if((darray[1] == '20') and (darray[2] == '01')):
             rt={}
             value=int('0x' + str(darray[3]),base=16) + (int('0x'+ str(darray[4]), base=16)*255)
-            #self.api.log("Get STW SEATALK frame: " + str(value) + " (0x" + str(darray[4]) +  str(darray[3]) + ")")
-            rt['STW'] = (float(value or '0') / 10.0) * 1.852
+            self.api.debug("Get STW SEATALK frame: " + str(value) + " (0x" + str(darray[4]) +  str(darray[3]) + ")")
+            rt['STW'] = ((float(value or '0') / 10.0) * 1.852) / 3.6
             source='internal'
             self.api.addData(self.PATHSTW, rt['STW'],source=source)
 
