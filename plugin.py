@@ -105,6 +105,7 @@ class Plugin:
     changeSequence=self.changeSequence
     seq=0
     self.api.log("started")
+    self.api.setStatus('STARTED', 'running')
     enabled=self.getConfigValue('enabled')
     if enabled is not None and enabled.lower()!='true':
       self.api.setStatus("INACTIVE", "disabled by config")
