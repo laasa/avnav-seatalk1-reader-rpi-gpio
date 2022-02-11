@@ -1,22 +1,23 @@
 import pigpio, time, socket, signal, sys, threading, queue
 
 class Plugin:
+  FILTER = []
   PATHDBT = "gps.STALK1_DBT"
   PATHSTW = "gps.STALK1_STW"
   CONFIG=[
     {
       'name': 'gpio',
-      'description': 'Select the used PIO pin here',
+      'description': 'Define gpio where the SeaTalk1 (yellow wire) is sensed (default is 4 => GPIO4 on pin 7)',
       'default': '4'
     },
     {
       'name': 'inverted',
-      'description': 'Select if signal is inverted',
+      'description': 'Define if input signal shall be inverted 0 => not inverted, 1 => Inverted (default is 1)',
       'default': '1'
     },
     {
       'name': 'pulldown',
-      'description': 'Select the pulldown mode',
+      'description': 'Define if using internal RPi pull up/down 0 => No, 1= Pull down, 2=Pull up (default is 2)',
       'default': '2'
     }    
   ]
@@ -120,25 +121,30 @@ class Plugin:
     connectionHandler=threading.Thread(target=self.handleConnection, name='seatalk1-reader-rpi-gpio')
     connectionHandler.setDaemon(True)
     connectionHandler.start()
+
+    #seq, data = self.api.fetchFromQueue(seq, number=100, waitTime=100, includeSource=True,filter=self.FILTER)
+
     while changeSequence == self.changeSequence:
       #if not self.isConnected:
-        #return {'status': 'not connected'}      
-      
+        #return {'status': 'not connected'}
+
+      source='internal'
+
+
       try:
-        source='internal'
         item = self.queue.get(block=True, timeout=10)
         data = item.split("\r")
-        #self.api.log("Read from queue: '" + str(data[0]) + "'")
+        self.api.debug("Read from queue: '" + str(data[0]) + "'")
         darray = data[0].split(",")
         if ( darray[0] == '$STALK' ):
 
-          # DPT: 00  02  YZ  XX XX  Depth below transducer: XXXX/10 feet
-          if((darray[1] == '00') and (darray[2] == '02') and (darray[3] == '00')):
-            rt={}
-            value=int('0x' + str(darray[4]),base=16) + (int('0x'+ str(darray[5]), base=16)*255)
-            self.api.debug("Get DBT SEATALK frame: " + str(value) + "'")
-            rt['DBT'] = float(value or '0') / (10.0 * 3.281)
-            self.api.addData(self.PATHDBT, rt['DBT'],source=source)
+            ''' DPT: 00  02  YZ  XX XX  Depth below transducer: XXXX/10 feet'''
+            if((darray[1] == '00') and (darray[2] == '02') and (darray[3] == '00')):
+              rt={}
+              value=int('0x' + str(darray[4]),base=16) + (int('0x'+ str(darray[5]), base=16)*255)
+              self.api.debug("Get DBT SEATALK frame: " + str(value) + "'")
+              rt['DBT'] = float(value or '0') / (10.0 * 3.281)
+              self.api.addData(self.PATHDBT, rt['DBT'],source=source)
 
 #                DBT - Depth below transducer
 #                1   2 3   4 5   6 7
@@ -154,13 +160,13 @@ class Plugin:
 #         6) F = Fathoms
 #         7) Checksum
 
-          ''' STW: 20  01  XX  XX  Speed through water: XXXX/10 Knots'''
-          if((darray[1] == '20') and (darray[2] == '01')):
-            rt={}
-            value=int('0x' + str(darray[3]),base=16) + (int('0x'+ str(darray[4]), base=16)*255)
-            self.api.debug("Get STW SEATALK frame: " + str(value) + " (0x" + str(darray[4]) +  str(darray[3]) + ")")
-            rt['STW'] = ((float(value or '0') / 10.0) * 1.852) / 3.6
-            self.api.addData(self.PATHSTW, rt['STW'],source=source)
+            ''' STW: 20  01  XX  XX  Speed through water: XXXX/10 Knots'''
+            if((darray[1] == '20') and (darray[2] == '01')):
+              rt={}
+              value=int('0x' + str(darray[3]),base=16) + (int('0x'+ str(darray[4]), base=16)*255)
+              self.api.debug("Get STW SEATALK frame: " + str(value) + " (0x" + str(darray[4]) +  str(darray[3]) + ")")
+              rt['STW'] = ((float(value or '0') / 10.0) * 1.852) / 3.6
+              self.api.addData(self.PATHSTW, rt['STW'],source=source)
 
       #VHW - Water speed and heading
 
@@ -183,10 +189,8 @@ class Plugin:
       except Exception as e:
         self.api.error("unable to read from queue: " + str(e))
         self.api.addData(self.PATHDBT, float('0'),source=source)
-        self.api.addData(self.PATHSTW, float('0'),source=source)        
+        self.api.addData(self.PATHSTW, float('0'),source=source)
         pass
-
-      time.sleep(0.1)
 
   def handleConnection(self):
     changeSequence=self.changeSequence
@@ -254,3 +258,4 @@ class Plugin:
           self.isConnected=False
           time.sleep(1)
       time.sleep(1)
+
